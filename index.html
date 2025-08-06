@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Femmi Wear - Fashion for You</title>
+<style>
+  /* Reset & base */
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  body {
+    background: #fef9f9;
+    color: #5a4d4d;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Header & Navbar */
+  header {
+    background: linear-gradient(45deg, #a8dadc, #ffe5d9);
+    padding: 15px 30px;
+    color: #3a3a3a;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(168, 218, 220, 0.5);
+  }
+  header h1 {
+    font-family: 'Georgia', serif;
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    color: #457b9d;
+  }
+  nav {
+    display: flex;
+    gap: 25px;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+  nav a {
+    color: #457b9d;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  nav a:hover {
+    color: #1d3557;
+  }
+
+  /* Search bar */
+  .search-bar {
+    margin-left: 20px;
+    flex-grow: 1;
+    max-width: 300px;
+  }
+  .search-bar input {
+    width: 100%;
+    padding: 7px 12px;
+    border-radius: 25px;
+    border: 2px solid #a8dadc;
+    outline: none;
+    font-size: 1rem;
+    background: #fef9f9;
+    color: #5a4d4d;
+    font-weight: 600;
+    transition: border-color 0.3s ease;
+  }
+  .search-bar input:focus {
+    border-color: #457b9d;
+  }
+
+  /* Cart icon */
+  .cart {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #457b9d;
+  }
+  .cart::after {
+    content: "3";
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background: #f4a261;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 50%;
+    font-weight: bold;
+  }
+
+  /* Main content */
+  main {
+    padding: 30px 50px;
+    flex-grow: 1;
+  }
+
+  /* Filters */
+  .filters {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+  }
+  .filters select {
+    padding: 8px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 2px solid #a8dadc;
+    background: #fef9f9;
+    color: #5a4d4d;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .filters select:hover {
+    background: #dbe7e4;
+    border-color: #457b9d;
+  }
+
+  /* Product grid */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 25px;
+  }
+
+  /* Product card */
+  .product-card {
+    background: #fef9f9;
+    border-radius: 15px;
+    box-shadow: 0 6px 15px rgba(168, 218, 220, 0.3);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(168, 218, 220, 0.5);
+  }
+  .product-name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+    color: #457b9d;
+  }
+  .product-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 18px;
+    flex-grow: 1;
+  }
+  .product-price {
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: #f4a261;
+    margin-bottom: 15px;
+  }
+  .btn-add {
+    background: #a8dadc;
+    color: #3a3a3a;
+    border: none;
+    padding: 12px 0;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  .btn-add:hover {
+    background: #457b9d;
+    color: white;
+  }
+
+  /* Footer */
+  footer {
+    background: #ffe5d9;
+    padding: 25px 50px;
+    color: #457b9d;
+    text-align: center;
+    font-weight: 600;
+  }
+  footer a {
+    color: #457b9d;
+    margin: 0 10px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  footer a:hover {
+    color: #1d3557;
+    text-decoration: underline;
+  }
+
+  /* Responsive */
+  @media (max-width: 700px) {
+    header {
+      justify-content: center;
+      gap: 15px;
+    }
+    .search-bar {
+      max-width: 100%;
+      margin-left: 0;
+      order: 3;
+      width: 100%;
+      margin-top: 15px;
+    }
+    nav {
+      order: 2;
+      gap: 15px;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+    }
+    .cart {
+      order: 1;
+      font-size: 1.8rem;
+    }
+    main {
+      padding: 20px 15px;
+    }
+    .filters {
+      justify-content: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Femmi Wear</h1>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Shop</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="search-bar">
+    <input type="search" placeholder="Search products..." aria-label="Search products" />
+  </div>
+  <div class="cart" title="Shopping Cart 🛒">&#128722;</div>
+</header>
+
+<main>
+  <div class="filters">
+    <select aria-label="Filter by Category">
+      <option value="all">All Categories</option>
+      <option value="tops">Tops</option>
+      <option value="bottoms">Bottoms</option>
+      <option value="dresses">Dresses</option>
+      <option value="accessories">Accessories</option>
+    </select>
+
+    <select aria-label="Sort products">
+      <option value="popular">Sort by Popularity</option>
+      <option value="newest">Newest Arrivals</option>
+      <option value="price-low">Price: Low to High</option>
+      <option value="price-high">Price: High to Low</option>
+    </select>
+  </div>
+
+  <section class="products" aria-label="Product List">
+    <!-- Dresses -->
+    <article class="product-card">
+      <h2 class="product-name">Floral Summer Dress</h2>
+      <p class="product-desc">Light and breezy floral dress, perfect for sunny days.</p>
+      <p class="product-price">$49.99</p>
+      <button class="btn-add" aria-label="Add Floral Summer Dress to cart">Add to Cart</button>
+    </article>
+    
+    <article class="product-card">
+      <h2 class="product-name">Elegant Evening Gown</h2>
+      <p class="product-desc">Floor-length gown with a subtle shimmer for special occasions.</p>
+      <p class="product-price">$129.99</p>
+      <button class="btn-add" aria-label="Add Elegant Evening Gown to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Casual Cotton Dress</h2>
+      <p class="product-desc">Comfortable cotton dress, ideal for everyday wear.</p>
+      <p class="product-price">$39.99</p>
+      <button class="btn-add" aria-label="Add Casual Cotton Dress to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Boho Maxi Dress</h2>
+      <p class="product-desc">Relaxed fit with bohemian prints and soft fabric.</p>
+      <p class="product-price">$59.99</p>
+      <button class="btn-add" aria-label="Add Boho Maxi Dress to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Classic Little Black Dress</h2>
+      <p class="product-desc">Timeless black dress, perfect for any evening out.</p>
+      <p class="product-price">$69.99</p>
+      <button class="btn-add" aria-label="Add Classic Little Black Dress to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Summer Linen Dress</h2>
+      <p class="product-desc">Light linen dress to keep you cool during summer days.</p>
+      <p class="product-price">$54.99</p>
+      <button class="btn-add" aria-label="Add Summer Linen Dress to cart">Add to Cart</button>
+    </article>
+
+    <!-- Other categories -->
+    <article class="product-card">
+      <h2 class="product-name">Casual Pink Top</h2>
+      <p class="product-desc">Soft cotton pink top for everyday comfort.</p>
+      <p class="product-price">$29.99</p>
+      <button class="btn-add" aria-label="Add Casual Pink Top to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">High-Waist Jeans</h2>
+      <p class="product-desc">Classic fit with a trendy high waist cut.</p>
+      <p class="product-price">$59.99</p>
+      <button class="btn-add" aria-label="Add High-Waist Jeans to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Elegant Scarf</h2>
+      <p class="product-desc">Add flair to your outfit with this elegant scarf.</p>
+      <p class="product-price">$19.99</p>
+      <button class="btn-add" aria-label="Add Elegant Scarf to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Sporty Tank Top</h2>
+      <p class="product-desc">Stay cool and stylish with this sporty tank top.</p>
+      <p class="product-price">$24.99</p>
+      <button class="btn-add" aria-label="Add Sporty Tank Top to cart">Add to Cart</button>
+    </article>
+
+    <article class="product-card">
+      <h2 class="product-name">Classic Black Skirt</h2>
+      <p class="product-desc">Timeless black skirt for all occasions.</p>
+      <p class="product-price">$39.99</p>
+      <button class="btn-add" aria-label="Add Classic Black Skirt to cart">Add to Cart</button>
+    </article>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Femmi Wear | Fashion for You</p>
+  <p>
+    <a href="#" aria-label="Facebook">Facebook</a> |
+    <a href="#" aria-label="Instagram">Instagram</a> |
+    <a href="#" aria-label="Twitter">Twitter</a>
+  </p>
+  <p>Contact us: <a href="mailto:support@femmiwear.com">support@femmiwear.com</a></p>
+</footer>
+
+</body>
+</html>
